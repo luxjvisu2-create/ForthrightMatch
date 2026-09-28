@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ForthrightMatch — No games. Just real intentions.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #F5F1EC;
+    --ink-soft: #C9B8BE;
+    --bg: #2A1620;
+    --bg-raised: #351C29;
+    --line: #4A2C39;
+    --amber: #E3A366;
+    --amber-soft: #4A3624;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 80px 24px 60px; }
+  @media (max-width: 480px) { .wrap { padding: 56px 20px 48px; } }
+
+  .mark { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.3rem; letter-spacing: -0.01em; margin-bottom: 56px; }
+
+  .ring {
+    width: 84px; height: 84px; border-radius: 50%;
+    border: 2px solid var(--amber); border-right-color: transparent; border-top-color: transparent;
+    opacity: 0.6; margin-bottom: 32px;
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif; font-weight: 900; font-size: clamp(2.1rem, 7vw, 3rem);
+    line-height: 1.08; letter-spacing: -0.01em; margin: 0 0 20px; color: var(--amber);
+  }
+  .lede { font-size: 1.1rem; line-height: 1.6; color: var(--ink-soft); max-width: 46ch; margin: 0 0 48px; }
+  .lede strong { color: var(--ink); font-weight: 500; }
+
+  .points { display: flex; flex-direction: column; gap: 14px; margin-bottom: 52px; }
+  .point { display: flex; gap: 12px; align-items: baseline; font-size: 0.98rem; line-height: 1.5; color: var(--ink-soft); }
+  .point::before { content: "—"; color: var(--amber); flex-shrink: 0; }
+  .point strong { color: var(--ink); font-weight: 500; }
+
+  .signup {
+    background: var(--bg-raised); border: 1px solid var(--line); border-radius: 6px;
+    padding: 28px 26px 26px;
+  }
+  .signup h2 { font-family: 'Fraunces', serif; font-weight: 500; font-size: 1.3rem; margin: 0 0 8px; }
+  .signup p { color: var(--ink-soft); font-size: 0.92rem; line-height: 1.5; margin: 0 0 20px; }
+  .signup-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  input[type="email"] {
+    flex: 1; min-width: 180px; background: var(--bg); border: 1px solid var(--line); border-radius: 3px;
+    padding: 13px 14px; font-size: 0.95rem; color: var(--ink); font-family: inherit;
+  }
+  input[type="email"]::placeholder { color: var(--ink-soft); opacity: 0.6; }
+  input[type="email"]:focus { outline: 2px solid var(--amber); outline-offset: 1px; }
+  button {
+    background: var(--amber); color: #2A1620; border: none; border-radius: 3px;
+    padding: 13px 22px; font-size: 0.95rem; font-weight: 600; font-family: inherit; cursor: pointer;
+  }
+  button:hover { filter: brightness(1.05); }
+  button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+  .consent { display: flex; gap: 10px; align-items: flex-start; margin-top: 14px; font-size: 0.85rem; line-height: 1.45; color: var(--ink-soft); cursor: pointer; }
+  .consent input { margin-top: 3px; accent-color: #E3A366; flex-shrink: 0; }
+  .err { color: #E3866B; font-size: 0.85rem; margin-top: 10px; display: none; }
+  .ok { color: var(--amber); font-size: 0.85rem; margin-top: 10px; display: none; }
+
+  .fine { margin-top: 28px; font-size: 0.82rem; color: var(--ink-soft); opacity: 0.7; line-height: 1.5; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="mark">ForthrightMatch</div>
+    <div class="ring"></div>
+
+    <h1>No games. Just real intentions.</h1>
+    <p class="lede">Every profile will be a real person, checked by hand before they ever appear. <strong>Replying will always be free</strong> — you'll only spend a credit when you're the one reaching out first. That's the whole filter.</p>
+
+    <div class="points">
+      <div class="point"><strong>Verified profiles.</strong> We're building it so there are no bots, no recycled photos, no accounts nobody's actually behind.</div>
+      <div class="point"><strong>Built for people who mean it.</strong> Paying to reach out first is meant to screen for real interest, not endless swiping.</div>
+      <div class="point"><strong>Starting small, on purpose.</strong> We plan to launch city by city instead of pretending to be everywhere at once.</div>
+    </div>
+
+    <div class="signup">
+      <h2>Be first to know</h2>
+      <p>We're still building this. Leave your email and we'll send you one message the day it opens.</p>
+      <div class="signup-row">
+        <input type="email" id="email" placeholder="you@email.com" autocomplete="email">
+        <button id="submit-btn" type="button">Notify me</button>
+      </div>
+      <label class="consent"><input type="checkbox" id="consent"> <span>Yes, email me once when ForthrightMatch launches. I can withdraw this any time by writing to info@forthrightmatch.com.</span></label>
+      <div class="err" id="err-msg">Enter a valid email and tick the box first.</div>
+      <div class="ok" id="ok-msg">Opening your email app — just hit send.</div>
+    </div>
+
+    <p class="fine">ForthrightMatch is in development, so there is nothing to sign up for or pay for yet. This page does not store your email; pressing "Notify me" opens an email to us that you send yourself. Contact: info@forthrightmatch.com</p>
+  </div>
+
+<script>
+  var btn = document.getElementById('submit-btn');
+  var input = document.getElementById('email');
+  var err = document.getElementById('err-msg');
+  var ok = document.getElementById('ok-msg');
+
+  function isValidEmail(v) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  }
+
+  btn.addEventListener('click', function () {
+    var email = input.value.trim();
+    ok.style.display = 'none';
+    if (!isValidEmail(email) || !document.getElementById('consent').checked) {
+      err.style.display = 'block';
+      return;
+    }
+    err.style.display = 'none';
+    var subject = encodeURIComponent('Notify me when ForthrightMatch launches');
+    var body = encodeURIComponent('Please email me once when ForthrightMatch launches. I agree to receive that message and can withdraw at any time.\n\nMy email: ' + email);
+    window.location.href = 'mailto:info@forthrightmatch.com?subject=' + subject + '&body=' + body;
+    ok.style.display = 'block';
+  });
+
+  input.addEventListener('input', function () {
+    if (err.style.display === 'block') err.style.display = 'none';
+  });
+</script>
+</body>
+</html>
