@@ -91,46 +91,61 @@
       <div class="point"><strong>Starting small, on purpose.</strong> We plan to launch city by city instead of pretending to be everywhere at once.</div>
     </div>
 
-    <div class="signup">
-      <h2>Be first to know</h2>
-      <p>We're still building this. Leave your email and we'll send you one message the day it opens.</p>
-      <div class="signup-row">
-        <input type="email" id="email" placeholder="you@email.com" autocomplete="email">
-        <button id="submit-btn" type="button">Notify me</button>
+    <div class="signup" id="signup-box">
+      <div id="form-state">
+        <h2>Be first to know</h2>
+        <p>We're still building this. Leave your email and we'll send you one message the day it opens.</p>
+        <form id="signup-form" action="https://formspree.io/f/xppwklby" method="POST">
+          <div class="signup-row">
+            <input type="email" name="email" id="email" placeholder="you@email.com" autocomplete="email" required>
+            <button type="submit">Notify me</button>
+          </div>
+          <label class="consent"><input type="checkbox" id="consent" required> <span>Yes, email me once when ForthrightMatch launches. I can withdraw this any time by writing to info@forthrightmatch.com.</span></label>
+          <input type="hidden" name="_subject" value="New ForthrightMatch landing signup">
+          <div class="err" id="err-msg">Enter a valid email and tick the box first.</div>
+        </form>
       </div>
-      <label class="consent"><input type="checkbox" id="consent"> <span>Yes, email me once when ForthrightMatch launches. I can withdraw this any time by writing to info@forthrightmatch.com.</span></label>
-      <div class="err" id="err-msg">Enter a valid email and tick the box first.</div>
-      <div class="ok" id="ok-msg">Opening your email app — just hit send.</div>
+      <div id="thanks-state" style="display:none;">
+        <h2>You're on the list</h2>
+        <p>Thanks — we'll email you the day ForthrightMatch opens, and not before.</p>
+      </div>
     </div>
 
-    <p class="fine">ForthrightMatch is in development, so there is nothing to sign up for or pay for yet. This page does not store your email; pressing "Notify me" opens an email to us that you send yourself. Contact: info@forthrightmatch.com</p>
+    <p class="fine">ForthrightMatch is in development, so there is nothing to sign up for or pay for yet. Your email is stored only to notify you at launch. Contact: info@forthrightmatch.com</p>
   </div>
 
 <script>
-  var btn = document.getElementById('submit-btn');
-  var input = document.getElementById('email');
+  var form = document.getElementById('signup-form');
   var err = document.getElementById('err-msg');
-  var ok = document.getElementById('ok-msg');
 
-  function isValidEmail(v) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-  }
-
-  btn.addEventListener('click', function () {
-    var email = input.value.trim();
-    ok.style.display = 'none';
-    if (!isValidEmail(email) || !document.getElementById('consent').checked) {
+  form.addEventListener('submit', function (e) {
+    if (!document.getElementById('consent').checked) {
+      e.preventDefault();
       err.style.display = 'block';
       return;
     }
     err.style.display = 'none';
-    var subject = encodeURIComponent('Notify me when ForthrightMatch launches');
-    var body = encodeURIComponent('Please email me once when ForthrightMatch launches. I agree to receive that message and can withdraw at any time.\n\nMy email: ' + email);
-    window.location.href = 'mailto:info@forthrightmatch.com?subject=' + subject + '&body=' + body;
-    ok.style.display = 'block';
+    e.preventDefault();
+    var data = new FormData(form);
+    fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    }).then(function (response) {
+      if (response.ok) {
+        document.getElementById('form-state').style.display = 'none';
+        document.getElementById('thanks-state').style.display = 'block';
+      } else {
+        err.textContent = 'Something went wrong — please try again.';
+        err.style.display = 'block';
+      }
+    }).catch(function () {
+      err.textContent = 'Something went wrong — please try again.';
+      err.style.display = 'block';
+    });
   });
 
-  input.addEventListener('input', function () {
+  document.getElementById('email').addEventListener('input', function () {
     if (err.style.display === 'block') err.style.display = 'none';
   });
 </script>
